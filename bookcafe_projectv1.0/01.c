@@ -75,8 +75,28 @@ void add() {
 // strdup => malloc(메모리 동적할당) 힙 영역에 문자열객체가 복제된다.
 
 void del() {
-	printf("지우고 싶은 책이름을 입력해주세요:");
+	printf("지우고 싶은 책 이름을 입력해주세요: \n");
+	char a[100];
+	scanf("%s", a);
+	int k = 0;
+	int i, j;
+	for (i= 0; i < book_idx; i++) {
+		if (strcmp(book_name[i], a) == 0) {
+			book_name[i] = NULL;
+			book_author[i] = NULL;
+			k = i;
+		}
+		
+	}
+	for (j = k; j< book_idx; j++) {
+		book_name[j] = book_name[j + 1];
+		book_author[j] = book_author[j + 1];
+	}
+	book_idx--;
+	printf("%s가 삭제되었습니다. \n", a);
+	
 
+	
 }
 void list() {
 	for (int i = 0; i < book_idx; i++) {
@@ -85,6 +105,7 @@ void list() {
 }
 void find() {
 	char buf1[100];
+	printf("찾고 싶은 책 이름을 입력해주세요: \n");
 	scanf("%s", buf1);
 	for (int i = 0; i < book_idx; i++) {
 		if (strcmp(buf1, book_name[i]) == 0) {
